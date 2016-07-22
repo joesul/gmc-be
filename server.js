@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 
 var MongoClient = mongodb.MongoClient;
-var mongoUrl = 'mongodb://localhost:27017/jmc_db';
+var mongoUrl = 'mongodb://heroku_489lrxbs:38s0chm1bqciuvn4t4bqt3tc78@ds027215.mlab.com:27215/heroku_489lrxbs';
 
 app.get('/jmc', function(req, res) {
   res.json({"description": "1st Down!"});
@@ -28,6 +28,7 @@ app.post('/jmc/search', function(req, res) {
   })
 });
 
-app.listen(3000, function(){
-  console.log('listen to events on Port 3000.')
+PORT = process.env.PORT || 80 || 3000;
+app.listen(PORT, function(){
+  console.log('listen to events on Port: ' PORT)
 });
