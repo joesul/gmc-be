@@ -16,7 +16,7 @@ app.get('/jmc', function(req, res) {
 });
 
 app.post('/jmc/search', function(req, res) {
-  var fullQuery = 'https://api.fantasydata.net/nfl/v2/JSON/Standings/2015?';
+  var fullQuery = 'https://api.fantasydata.net/nfl/v2/JSON/Standings/2015';
 
   request({
     url: fullQuery,
