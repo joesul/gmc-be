@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 
 var MongoClient = mongodb.MongoClient;
-var mongoUrl = 'mongodb://heroku_489lrxbs:38s0chm1bqciuvn4t4bqt3tc78@ds027215.mlab.com:27215/heroku_489lrxbs';
+var mongoUrl = MONGODB_URI;
 
 app.get('/jmc', function(req, res) {
   res.json({"description": "1st Down!"});
@@ -20,7 +20,7 @@ app.post('/jmc/search', function(req, res) {
 
   request({
     url: fullQuery,
-    headers: { "Ocp-Apim-Subscription-Key" : "37eb9a6450e94212a32b615e768f4ded"},
+    headers: { "Ocp-Apim-Subscription-Key" : NFL_API_KEY},
     method: 'GET',
     callback: function(error, response, body){
       res.send(JSON.parse(body));
