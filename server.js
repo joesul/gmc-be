@@ -36,7 +36,7 @@ app.post('/jmc/favorites', function(req, res) {
     } else {
       console.log('Connection established to', mongoUrl);
 
-      var newTeam = request.body;
+      var newTeam = req.body;
 
       favoriteTeams.insert(newTeam, function(err, result) {
         if (err) {
