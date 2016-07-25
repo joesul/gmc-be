@@ -16,19 +16,47 @@ app.get('/jmc', function(req, res) {
 });
 
 app.post('/jmc/search', function(req, res) {
-  var fullQuery = 'https://api.fantasydata.net/nfl/v2/JSON/FantasyDefenseByGameByTeam/2015REG/1/NYJ?'
+  var fullQuery = 'https://api.fantasydata.net/nfl/v2/JSON/Standings/2015?';
 
   request({
     url: fullQuery,
     headers: { "Ocp-Apim-Subscription-Key" : "37eb9a6450e94212a32b615e768f4ded"},
     method: 'GET',
     callback: function(error, response, body){
-      res.send(body);
+      res.send(JSON.parse(body));
     }
   })
 });
 
-PORT = process.env.PORT || 80 || 3000;
+app.post('/jmc/favorites', function(req, res) {
+  MongoClient.connect(mongoUrl, function(err, db) {
+    var favoriteTeams = db.collection('nfl_teams');
+    if (err) {
+      console.log('Unable to connect to the mongoDB server. ERROR:', err);
+    } else {
+      console.log('Connection established to', mongoUrl);
+
+      var newTeam = request.body;
+
+      favoriteTeams.insert(newTeam, function(err, result) {
+        if (err) {
+          console.log(err);
+          response.json("error");
+        } else {
+          console.log('Inserted.');
+          console.log('RESULT!!!!', result);
+          console.log("end result");
+          response.json(result);
+        }
+        db.close(function() {
+          console.log( "database CLOSED");
+        });
+      })
+    }
+  })
+});
+
+PORT = process.env.PORT || 3000;
 app.listen(PORT, function(){
-  console.log('listen to events on Port: ' PORT)
+  console.log('listen to events on Port: ', PORT);
 });
