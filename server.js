@@ -39,7 +39,7 @@ app.post('/jmc/favorites', function(req, res) {
       var newTeam = req.body;
       console.log(newTeam);
 
-      favoriteTeams.insert(newTeam, function(err, result) {
+      favoriteTeams.insert([newTeam], function(err, result) {
         if (err) {
           console.log(err);
           res.json("error");
