@@ -37,16 +37,17 @@ app.post('/jmc/favorites', function(req, res) {
       console.log('Connection established to', mongoUrl);
 
       var newTeam = req.body;
+      console.log(newTeam);
 
       favoriteTeams.insert(newTeam, function(err, result) {
         if (err) {
           console.log(err);
-          response.json("error");
+          res.json("error");
         } else {
           console.log('Inserted.');
           console.log('RESULT!!!!', result);
           console.log("end result");
-          response.json(result);
+          res.json(result);
         }
         db.close(function() {
           console.log( "database CLOSED");
