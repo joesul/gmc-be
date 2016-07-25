@@ -20,7 +20,7 @@ app.post('/jmc/search', function(req, res) {
 
   request({
     url: fullQuery,
-    headers: { "Ocp-Apim-Subscription-Key" : NFL_API_KEY},
+    headers: { "Ocp-Apim-Subscription-Key" : "NFL_API_KEY"},
     method: 'GET',
     callback: function(error, response, body){
       res.send(JSON.parse(body));
