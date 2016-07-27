@@ -16,6 +16,32 @@ app.get('/jmc', function(req, res) {
   res.json({"description": "1st Down!"});
 });
 
+app.get('/jmc/favorites/', function(req, res){
+
+  MongoClient.connect(mongoUrl, function (err, db) {
+    var favoriteTeams = db.collection('nfl_teams');
+    if (err) {
+      console.log('Unable to connect to the mongoDB server. ERROR:', err);
+    }
+    else {
+      console.log('Connection established to', mongoUrl);
+    }
+      favoriteTeams.find().toArray(function (err, res) {
+        if (err) {
+          console.log("ERROR!", err);
+          res.json("error");
+        }
+        else if (result.length) {
+          console.log('Found:', res);
+          response.json(res);
+        }
+        db.close(function() {
+          console.log( "database CLOSED");
+        });
+      });
+    }
+  });
+
 app.post('/jmc/search', function(req, res) {
   var fullQuery = 'https://api.fantasydata.net/nfl/v2/JSON/Standings/2015';
 
@@ -58,7 +84,7 @@ app.post('/jmc/favorites', function(req, res) {
   })
 });
 
-PORT = process.env.PORT || 3000;
+PORT = process.env.PORT || 80;
 app.listen(PORT, function(){
   console.log('listen to events on Port: ', PORT);
 });
