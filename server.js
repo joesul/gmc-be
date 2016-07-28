@@ -97,7 +97,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
       }
       else
       {
-        gettingLateCollection.remove().toArray(function (err, result) {
+        gettingLateCollection.remove(request.params).toArray(function (err, result) {
           if (err) {
             console.log("ERROR!", err);
             response.json("error");
