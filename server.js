@@ -39,7 +39,7 @@ app.get('/jmc/favorites/', function(req, res){
           console.log( "database CLOSED");
         });
       });
-    }
+    })
   });
 
 app.post('/jmc/search', function(req, res) {
