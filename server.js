@@ -78,7 +78,7 @@ app.post('/jmc/favorites', function(req, res) {
   })
 });
 
-app.delete('/jmc/delete', function(request, response) {
+app.delete('/jmc/', function(request, response) {
 
   MongoClient.connect(mongoUrl, function(err, db) {
     var favoriteTeams = db.collection('nfl_teams');
@@ -87,18 +87,14 @@ app.delete('/jmc/delete', function(request, response) {
     } else {
       console.log('Connection established to', mongoUrl);
 
-      favoriteTeams.remove({}, function(err, result) {
+      favoriteTeams.remove(), function(err, result) {
         if(err) {
           console.log("error!", err);
           response.json("error");
         }
-         else if (result.length) {
+         else {
           console.log("Found:", result);
           response.json(result);
-        }
-        else {
-          console.log("list is empty");
-          response.json("none found");
         }
       });
     }
