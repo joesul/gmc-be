@@ -16,7 +16,7 @@ app.get('/jmc', function(req, res) {
   res.json({"description": "1st Down!"});
 });
 
-app.get('/jmc/favorites/', function(request, response){
+app.get('/jmc/favorites', function(request, response){
 
   MongoClient.connect(mongoUrl, function (err, db) {
     var favoriteTeams = db.collection('nfl_teams');
@@ -35,9 +35,6 @@ app.get('/jmc/favorites/', function(request, response){
           console.log('Found:', result);
           response.json(result);
         }
-        db.close(function() {
-          console.log( "database CLOSED");
-        });
       });
     })
   });
@@ -76,9 +73,6 @@ app.post('/jmc/favorites', function(req, res) {
           console.log("end result");
           res.json(result);
         }
-        db.close(function() {
-          console.log( "database CLOSED");
-        })
       })
     }
   })
