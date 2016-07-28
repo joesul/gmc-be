@@ -47,7 +47,7 @@ app.post('/jmc/search', function(req, res) {
 
   request({
     url: fullQuery,
-    headers: { "Ocp-Apim-Subscription-Key" : nflKey},
+    headers: { "Ocp-Apim-Subscription-Key" : "37eb9a6450e94212a32b615e768f4ded"},
     method: 'GET',
     callback: function(error, response, body){
       res.send(JSON.parse(body));
