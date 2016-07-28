@@ -78,7 +78,7 @@ app.post('/jmc/favorites', function(req, res) {
   })
 });
 
-app.delete('/jmc', function(request, response) {
+app.delete('/jmc/delete', function(request, response) {
 
 console.log("request.body:", request.body);
 console.log("request.params:", request.params);
@@ -90,7 +90,7 @@ MongoClient.connect(mongoUrl, function(err, db) {
   } else {
     console.log('Connection established to', mongoUrl);
 
-    favoriteTeams.find().toArray(request, function(err, numOfRemovedDocs) {
+    favoriteTeams.remove({}).toArray(request, function(err, numOfRemovedDocs) {
       console.log("numOfRemovedDocs:", numOfRemovedDocs);
       if(err) {
         console.log("error!", err);
