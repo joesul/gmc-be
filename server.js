@@ -87,7 +87,7 @@ app.delete('/jmc/', function(request, response) {
     } else {
       console.log('Connection established to', mongoUrl);
 
-      favoriteTeams.remove(), function(err, result) {
+      favoriteTeams.remove({}), function(err, result) {
         if(err) {
           console.log("error!", err);
           response.json("error");
