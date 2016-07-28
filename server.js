@@ -26,14 +26,14 @@ app.get('/jmc/favorites/', function(req, res){
     else {
       console.log('Connection established to', mongoUrl);
     }
-      favoriteTeams.find().toArray(function (err, res) {
+      favoriteTeams.find().toArray(function (err, result) {
         if (err) {
           console.log("ERROR!", err);
           res.json("error");
         }
         else if (res.length) {
-          console.log('Found:', res);
-          send.json(res);
+          console.log('Found:', result);
+          res.json(result);
         }
         db.close(function() {
           console.log( "database CLOSED");
