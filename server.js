@@ -78,7 +78,7 @@ app.post('/jmc/favorites', function(req, res) {
         }
         db.close(function() {
           console.log( "database CLOSED");
-        });
+        })
       })
     }
   })
