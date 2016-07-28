@@ -78,7 +78,7 @@ app.post('/jmc/favorites', function(req, res) {
   })
 });
 
-app.delete('/jmc/favorites', function(request, response) {
+app.delete('/jmc/delete', function(request, response) {
 
 console.log("request.body:", request.body);
 console.log("request.params:", request.params);
