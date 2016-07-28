@@ -21,10 +21,10 @@ app.get('/jmc/favorites', function(request, response){
   MongoClient.connect(mongoUrl, function (err, db) {
     var favoriteTeams = db.collection('nfl_teams');
     if (err) {
-      console.log('Unable to connect to the mongoDB server. ERROR:', err);
+      console.log("Unable to connect to the mongoDB server. ERROR:", err);
     }
     else {
-      console.log('Connection established to', mongoUrl);
+      console.log("Connection established to", mongoUrl);
     }
       favoriteTeams.find().toArray(function (err, result) {
         if (err) {
@@ -68,8 +68,8 @@ app.post('/jmc/favorites', function(req, res) {
           console.log(err);
           res.json("error");
         } else {
-          console.log('Inserted.');
-          console.log('RESULT!!!!', result);
+          console.log("Inserted.");
+          console.log("RESULT!!!!", result);
           console.log("end result");
           res.json(result);
         }
@@ -77,6 +77,44 @@ app.post('/jmc/favorites', function(req, res) {
     }
   })
 });
+
+app.delete('/jmc/delete', function(request, response) {
+
+console.log("request.body:", request.body);
+console.log("request.params:", request.params);
+
+MongoClient.connect(mongoUrl, function(err, db) {
+  var favoriteTeams = db.collection('nfl_teams');
+  if (err) {
+    console.log('Unable to connect to the mongoDB server. ERROR:', err);
+  } else {
+    console.log('Connection established to', mongoUrl);
+
+    favoriteTeams.remove(request, function(err, numOfRemovedDocs) {
+      console.log("numOfRemovedDocs:", numOfRemovedDocs);
+      if(err) {
+        console.log("error!", err);
+      }
+      else
+      {
+        gettingLateCollection.remove().toArray(function (err, result) {
+          if (err) {
+            console.log("ERROR!", err);
+            response.json("error");
+          } else if (result.length) {
+            console.log("Found:", result);
+            response.json(result);
+          } else { //
+            console.log("list is empty");
+            response.json("none found");
+          }
+        });
+      }
+    });
+  }
+});
+});
+
 
 PORT = process.env.PORT || 80;
 app.listen(PORT, function(){
