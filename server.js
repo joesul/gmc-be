@@ -31,7 +31,7 @@ app.get('/jmc/favorites/', function(request, response){
           console.log("ERROR!", err);
           response.json("error");
         }
-        else if (res.length) {
+        else if (response.length) {
           console.log('Found:', result);
           response.json(result);
         }
