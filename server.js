@@ -78,7 +78,7 @@ app.post('/jmc/favorites', function(req, res) {
   })
 });
 
-PORT = process.env.PORT || 3000;
+PORT = process.env.PORT || 80;
 app.listen(PORT, function(){
   console.log('listen to events on Port: ', PORT);
 });
