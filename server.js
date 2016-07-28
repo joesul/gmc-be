@@ -16,7 +16,7 @@ app.get('/jmc', function(req, res) {
   res.json({"description": "1st Down!"});
 });
 
-app.get('/jmc/favorites/', function(req, res){
+app.get('/jmc/favorites/', function(request, response){
 
   MongoClient.connect(mongoUrl, function (err, db) {
     var favoriteTeams = db.collection('nfl_teams');
@@ -29,11 +29,11 @@ app.get('/jmc/favorites/', function(req, res){
       favoriteTeams.find().toArray(function (err, result) {
         if (err) {
           console.log("ERROR!", err);
-          res.json("error");
+          response.json("error");
         }
         else if (res.length) {
           console.log('Found:', result);
-          res.json(result);
+          response.json(result);
         }
         db.close(function() {
           console.log( "database CLOSED");
