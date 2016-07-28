@@ -31,7 +31,7 @@ app.get('/jmc/favorites/', function(req, res){
           console.log("ERROR!", err);
           res.json("error");
         }
-        else if (result.length) {
+        else if (res.length) {
           console.log('Found:', res);
           response.json(res);
         }
@@ -74,7 +74,7 @@ app.post('/jmc/favorites', function(req, res) {
           console.log('Inserted.');
           console.log('RESULT!!!!', result);
           console.log("end result");
-          res.json(res);
+          res.json(result);
         }
         db.close(function() {
           console.log( "database CLOSED");
