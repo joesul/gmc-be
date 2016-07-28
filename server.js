@@ -74,7 +74,7 @@ app.post('/jmc/favorites', function(req, res) {
           console.log('Inserted.');
           console.log('RESULT!!!!', result);
           console.log("end result");
-          res.json(result);
+          res.json(res);
         }
         db.close(function() {
           console.log( "database CLOSED");
