@@ -33,7 +33,7 @@ app.get('/jmc/favorites/', function(req, res){
         }
         else if (res.length) {
           console.log('Found:', res);
-          res.json(res);
+          send.json(res);
         }
         db.close(function() {
           console.log( "database CLOSED");
